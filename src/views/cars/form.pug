@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  h2= car ? 'Edit Car' : 'Add New Car'
+  form(method="POST", action= car ? `/cars/edit/${car.id}` : '/cars')
+    div
+      label Name
+      input(type="text", name="name", value=car?.name)
+    div
+      label Model
+      input(type="text", name="model", value=car?.model)
+    div
+      label Price per Day
+      input(type="number", name="price_per_day", value=car?.price_per_day)
+    div
+      label Available
+      input(type="checkbox", name="available", checked=car?.available)
+    button(type="submit") Submit

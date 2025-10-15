@@ -1,0 +1,25 @@
+
+extends ../layout
+
+block content
+  h2 Customers
+  a(href="/customers/add") Add New Customer
+  table
+    thead
+      tr
+        th ID
+        th Name
+        th Email
+        th Phone
+        th Actions
+    tbody
+      each customer in customers
+        tr
+          td= customer.id
+          td= customer.name
+          td= customer.email
+          td= customer.phone
+          td
+            a(href=`/customers/edit/${customer.id}`) Edit
+            form(action=`/customers/delete/${customer.id}`, method="POST", style="display:inline")
+              button(type="submit") Delete

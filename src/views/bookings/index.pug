@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  h2 Bookings
+  a.btn(href="/bookings/new") Add Booking
+  table
+    thead
+      tr
+        th ID
+        th Customer
+        th Car
+        th Start Date
+        th End Date
+        th Total Price
+        th Actions
+    tbody
+      each b in bookings
+        tr
+          td= b.id
+          td= b.customer_name
+          td #{b.car_name} #{b.model}
+          td= b.start_date
+          td= b.end_date
+          td $#{b.total_price}
+          td
+            a.btn(href=`/bookings/edit/${b.id}`) Edit
+            form(method="POST", action=`/bookings/delete/${b.id}`, style="display:inline")
+              button.btn(type="submit") Delete
