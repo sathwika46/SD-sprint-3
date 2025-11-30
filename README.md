@@ -6,3 +6,5 @@ A simple Node.js + Express + MySQL + Pug web app for managing car rentals.
 ```bash
 npm install
 npm run dev
+
+
