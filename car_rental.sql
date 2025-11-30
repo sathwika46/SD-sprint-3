@@ -61,3 +61,4 @@ INSERT INTO bookings (car_id, customer_id, start_date, end_date, total_price) VA
 SELECT * FROM cars;
 SELECT * FROM customers;
 SELECT * FROM bookings;
+
