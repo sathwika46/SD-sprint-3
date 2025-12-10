@@ -1,46 +1,40 @@
-
-
 import express from "express";
 import { getAllBookings, getBookingById, addBooking, updateBooking, deleteBooking } from "../models/Booking.js";
-import { getAllCustomers } from "../models/Customer.js";
 import { getAllCars } from "../models/Car.js";
+import { getAllCustomers } from "../models/Customer.js";
 
 const router = express.Router();
 
-// List
 router.get("/", async (req, res) => {
   const bookings = await getAllBookings();
   res.render("bookings/index", { bookings });
 });
 
-// Add form
 router.get("/new", async (req, res) => {
-  const customers = await getAllCustomers();
   const cars = await getAllCars();
-  res.render("bookings/form", { customers, cars });
+  const customers = await getAllCustomers();
+  res.render("bookings/forms", { booking: null, cars, customers });
 });
 
-// Add submit
 router.post("/", async (req, res) => {
-  await addBooking(req.body);
+  const { car_id, customer_id, start_date, end_date, total_price } = req.body;
+  await addBooking(car_id, customer_id, start_date, end_date, total_price);
   res.redirect("/bookings");
 });
 
-// Edit form
 router.get("/edit/:id", async (req, res) => {
   const booking = await getBookingById(req.params.id);
-  const customers = await getAllCustomers();
   const cars = await getAllCars();
-  res.render("bookings/form", { booking, customers, cars });
+  const customers = await getAllCustomers();
+  res.render("bookings/forms", { booking, cars, customers });
 });
 
-// Edit submit
 router.post("/edit/:id", async (req, res) => {
-  await updateBooking(req.params.id, req.body);
+  const { car_id, customer_id, start_date, end_date, total_price } = req.body;
+  await updateBooking(req.params.id, car_id, customer_id, start_date, end_date, total_price);
   res.redirect("/bookings");
 });
 
-// Delete
 router.post("/delete/:id", async (req, res) => {
   await deleteBooking(req.params.id);
   res.redirect("/bookings");
