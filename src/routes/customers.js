@@ -1,45 +1,46 @@
-
 import express from "express";
-import { 
-  getAllCustomers, 
-  getCustomerById, 
-  addCustomer, 
-  updateCustomer, 
-  deleteCustomer 
+import {
+  getAllCustomers,
+  getCustomerById,
+  addCustomer,
+  updateCustomer,
+  deleteCustomer,
 } from "../models/Customer.js";
 
 const router = express.Router();
 
-// Show all customers
+// ✅ View all customers
 router.get("/", async (req, res) => {
   const customers = await getAllCustomers();
-  res.render("customers/index", { title: "Customers", customers });
+  res.render("customers/index", { customers });
 });
 
-// Show add customer form
-router.get("/add", (req, res) => {
-  res.render("customers/add");
+// ✅ Add new customer form
+router.get("/new", (req, res) => {
+  res.render("customers/form", { customer: null });
 });
 
-// Add a new customer
-router.post("/add", async (req, res) => {
-  await addCustomer(req.body);
+// ✅ Handle new customer submission
+router.post("/", async (req, res) => {
+  const { name, email, phone } = req.body;
+  await addCustomer(name, email, phone);
   res.redirect("/customers");
 });
 
-// Show edit customer form
+// ✅ Edit customer form
 router.get("/edit/:id", async (req, res) => {
   const customer = await getCustomerById(req.params.id);
-  res.render("customers/edit", { customer });
+  res.render("customers/form", { customer });
 });
 
-// Update customer
+// ✅ Handle update
 router.post("/edit/:id", async (req, res) => {
-  await updateCustomer(req.params.id, req.body);
+  const { name, email, phone } = req.body;
+  await updateCustomer(req.params.id, name, email, phone);
   res.redirect("/customers");
 });
 
-// Delete customer
+// ✅ Delete customer
 router.post("/delete/:id", async (req, res) => {
   await deleteCustomer(req.params.id);
   res.redirect("/customers");

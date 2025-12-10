@@ -6,20 +6,20 @@ block content
     div
       label Customer
       select(name="customer_id")
-        each customer in customers
-          option(value=customer.id, selected=booking?.customer_id==customer.id)= customer.name
+        each c in customers
+          option(value=c.id, selected=(booking && booking.customer_id == c.id) ? true : false)= c.name
     div
       label Car
       select(name="car_id")
         each car in cars
-          option(value=car.id, selected=booking?.car_id==car.id)= `${car.name} ${car.model}`
+          option(value=car.id, selected=(booking && booking.car_id == car.id) ? true : false)= `${car.name} ${car.model}`
     div
       label Start Date
-      input(type="date", name="start_date", value=booking?.start_date)
+      input(type="date", name="start_date", value=booking ? booking.start_date : '')
     div
       label End Date
-      input(type="date", name="end_date", value=booking?.end_date)
+      input(type="date", name="end_date", value=booking ? booking.end_date : '')
     div
       label Total Price
-      input(type="number", name="total_price", value=booking?.total_price)
+      input(type="number", name="total_price", value=booking ? booking.total_price : '')
     button(type="submit") Submit

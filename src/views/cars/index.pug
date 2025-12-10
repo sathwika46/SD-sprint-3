@@ -1,18 +1,15 @@
-
-
-
 extends ../layout
 
 block content
   h2 Cars
-  a(href="/cars/add") Add New Car
+  a.btn(href="/cars/new") Add Car
   table
     thead
       tr
         th ID
         th Name
         th Model
-        th Price per Day
+        th Price/Day
         th Available
         th Actions
     tbody
@@ -22,8 +19,8 @@ block content
           td= car.name
           td= car.model
           td $#{car.price_per_day}
-          td= car.available ? "Yes" : "No"
+          td= car.available ? 'Yes' : 'No'
           td
-            a(href=`/cars/edit/${car.id}`) Edit
-            form(action=`/cars/delete/${car.id}`, method="POST", style="display:inline")
-              button(type="submit") Delete
+            a.btn(href=`/cars/edit/${car.id}`) Edit
+            form(method="POST", action=`/cars/delete/${car.id}`, style="display:inline")
+              button.btn.btn-danger(type="submit") Delete
