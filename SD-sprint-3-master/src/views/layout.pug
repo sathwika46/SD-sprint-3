@@ -1,0 +1,42 @@
+//- doctype html
+//- html
+//-   head
+//-     title Car Rental App
+//-     link(rel="stylesheet", href="/css/style.css")
+//-   body
+//-     h1 Car Rental Management
+//-     nav
+//-       a.btn(href="/bookings") Bookings
+//-       a.btn(href="/cars") Cars
+//-       a.btn(href="/customers") Customers
+//-     hr
+//-     block content
+
+
+doctype html
+html
+  head
+    title Car Rental App
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    header
+      h1 Car Rental Management System
+
+      nav
+        if user
+          a.btn(href="/bookings") Bookings
+          a.btn(href="/cars") Cars
+          a.btn(href="/customers") Customers
+          span(style="margin-left: 20px") Welcome #{user.name}!
+          a.btn(href="/logout", style="background-color: #d9534f; color: white; margin-left: 10px") Logout
+        else
+          a.btn(href="/login") Login
+          a.btn(href="/signup") Sign Up
+    hr
+
+    block content
+
+    footer
+      hr
+      p(style="text-align:center; font-size: 12px; color: gray;")
+        | © #{new Date().getFullYear()} Velocity Devs - Car Rental App

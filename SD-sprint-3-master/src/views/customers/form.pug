@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h2= customer ? 'Edit Customer' : 'Add New Customer'
+  form(method="POST", action= customer ? `/customers/edit/${customer.id}` : '/customers')
+    div
+      label Name
+      input(type="text", name="name", required, value=customer ? customer.name : '')
+    div
+      label Email
+      input(type="email", name="email", required, value=customer ? customer.email : '')
+    div
+      label Phone
+      input(type="text", name="phone", required, value=customer ? customer.phone : '')
+    button(type="submit") Submit

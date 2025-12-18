@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  h2 Customers
+  a.btn(href="/customers/new") Add Customer
+  table
+    thead
+      tr
+        th ID
+        th Name
+        th Email
+        th Phone
+        th Actions
+    tbody
+      each c in customers
+        tr
+          td= c.id
+          td= c.name
+          td= c.email
+          td= c.phone
+          td
+            a.btn(href=`/customers/edit/${c.id}`) Edit
+            form(method="POST", action=`/customers/delete/${c.id}`, style="display:inline")
+              button.btn.btn-danger(type="submit") Delete

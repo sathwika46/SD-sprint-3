@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  h2= car ? 'Edit Car' : 'Add New Car'
+  form(method="POST", action= car ? `/cars/edit/${car.id}` : '/cars')
+    div
+      label Name
+      input(type="text", name="name", required, value=car ? car.name : '')
+    div
+      label Model
+      input(type="text", name="model", required, value=car ? car.model : '')
+    div
+      label Price per Day
+      input(type="number", step="0.01", name="price_per_day", required, value=car ? car.price_per_day : '')
+    div
+      label Available
+      select(name="available")
+        option(value="1", selected=(car && car.available == 1) ? true : false) Yes
+        option(value="0", selected=(car && car.available == 0) ? true : false) No
+    button(type="submit") Submit

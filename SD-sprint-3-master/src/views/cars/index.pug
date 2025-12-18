@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  h2 Cars
+  a.btn(href="/cars/new") Add Car
+  table
+    thead
+      tr
+        th ID
+        th Name
+        th Model
+        th Price/Day
+        th Available
+        th Actions
+    tbody
+      each car in cars
+        tr
+          td= car.id
+          td= car.name
+          td= car.model
+          td $#{car.price_per_day}
+          td= car.available ? 'Yes' : 'No'
+          td
+            a.btn(href=`/cars/edit/${car.id}`) Edit
+            form(method="POST", action=`/cars/delete/${car.id}`, style="display:inline")
+              button.btn.btn-danger(type="submit") Delete

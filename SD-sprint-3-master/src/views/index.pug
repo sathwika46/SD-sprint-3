@@ -1,0 +1,26 @@
+
+extends ../layout
+
+block content
+  h2= booking ? 'Edit Booking' : 'Add New Booking'
+  form(method="POST", action= booking ? `/bookings/edit/${booking.id}` : '/bookings')
+    div
+      label Customer
+      select(name="customer_id")
+        each customer in customers
+          option(value=customer.id, selected=booking?.customer_id==customer.id)= customer.name
+    div
+      label Car
+      select(name="car_id")
+        each car in cars
+          option(value=car.id, selected=booking?.car_id==car.id)= `${car.name} ${car.model}`
+    div
+      label Start Date
+      input(type="date", name="start_date", value=booking?.start_date)
+    div
+      label End Date
+      input(type="date", name="end_date", value=booking?.end_date)
+    div
+      label Total Price
+      input(type="number", name="total_price", value=booking?.total_price)
+    button(type="submit") Submit
